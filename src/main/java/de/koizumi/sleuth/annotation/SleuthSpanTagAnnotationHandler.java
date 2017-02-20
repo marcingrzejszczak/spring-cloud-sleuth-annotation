@@ -1,10 +1,9 @@
 package de.koizumi.sleuth.annotation;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;
@@ -37,7 +36,6 @@ public class SleuthSpanTagAnnotationHandler {
 				MethodSignature ms = (MethodSignature) signature;
 				Method method = ms.getMethod();
 				Method mostSpecificMethod = AopUtils.getMostSpecificMethod(method, pjp.getTarget().getClass());
-
 				List<SleuthAnnotatedParameterContainer> annotatedParametersIndices = findAnnotatedParameters(
 						mostSpecificMethod, pjp.getArgs());
 				if (!method.equals(mostSpecificMethod)) {
@@ -45,7 +43,6 @@ public class SleuthSpanTagAnnotationHandler {
 							method, pjp.getArgs());
 					mergeAnnotatedParameterContainers(annotatedParametersIndices, annotatedParametersIndicesForActualMethod);
 				}
-
 				addAnnotatedArguments(annotatedParametersIndices);
 			}
 
@@ -58,14 +55,13 @@ public class SleuthSpanTagAnnotationHandler {
 			List<SleuthAnnotatedParameterContainer> annotatedParametersIndicesForActualMethod) {
 		for (SleuthAnnotatedParameterContainer container : annotatedParametersIndicesForActualMethod) {
 			final int index = container.getParameterIndex();
-			boolean parameterContained = annotatedParametersIndices.stream()
-					.anyMatch(new Predicate<SleuthAnnotatedParameterContainer>() {
-
-						@Override
-						public boolean test(SleuthAnnotatedParameterContainer t) {
-							return t.getParameterIndex() == index;
-						}
-					});
+			boolean parameterContained = false;
+			for (SleuthAnnotatedParameterContainer parameterContainer : annotatedParametersIndices) {
+				if (parameterContainer.getParameterIndex() == index) {
+					parameterContained = true;
+					break;
+				}
+			}
 			if (!parameterContained) {
 				annotatedParametersIndices.add(container);
 			}
@@ -79,7 +75,7 @@ public class SleuthSpanTagAnnotationHandler {
 		}
 	}
 
-	String resolveTagValue(SleuthSpanTag annotation, Object argument) {
+	String resolveTagValue(SpanTag annotation, Object argument) {
 		if (argument == null) {
 			return "null";
 		}
@@ -102,19 +98,21 @@ public class SleuthSpanTagAnnotationHandler {
 	}
 
 	private List<SleuthAnnotatedParameterContainer> findAnnotatedParameters(Method method, Object[] args) {
-		Parameter[] parameters = method.getParameters();
+		Annotation[][] parameters = method.getParameterAnnotations();
 		List<SleuthAnnotatedParameterContainer> result = new ArrayList<>();
 
 		int i = 0;
-		for (Parameter parameter : parameters) {
-			if (parameter.isAnnotationPresent(SleuthSpanTag.class)) {
-				SleuthSpanTag annotation = parameter.getAnnotation(SleuthSpanTag.class);
-				SleuthAnnotatedParameterContainer container = new SleuthAnnotatedParameterContainer();
-				container.setAnnotation(annotation);
-				container.setArgument(args[i]);
-				container.setParameter(parameter);
-				container.setParameterIndex(i);
-				result.add(container);
+		for (Annotation[] parameter : parameters) {
+			for (Annotation parameter2 : parameter) {
+				if (parameter2 instanceof SpanTag) {
+					SpanTag annotation = (SpanTag) parameter2;
+					SleuthAnnotatedParameterContainer container = new SleuthAnnotatedParameterContainer();
+					container.setAnnotation(annotation);
+					container.setArgument(args[i]);
+					container.setParameter(parameter2);
+					container.setParameterIndex(i);
+					result.add(container);
+				}
 			}
 			i++;
 		}

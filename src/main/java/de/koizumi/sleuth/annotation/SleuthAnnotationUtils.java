@@ -10,11 +10,11 @@ public class SleuthAnnotationUtils {
 		return findAnnotation(method) != null;
 	}
 	
-	public static CreateSleuthSpan findAnnotation(Method method) {
-		CreateSleuthSpan annotation = AnnotationUtils.findAnnotation(method, CreateSleuthSpan.class);
+	public static NewSpan findAnnotation(Method method) {
+		NewSpan annotation = AnnotationUtils.findAnnotation(method, NewSpan.class);
 		if (annotation == null) {
 			try {
-				annotation = AnnotationUtils.findAnnotation(method.getDeclaringClass().getMethod(method.getName(), method.getParameterTypes()), CreateSleuthSpan.class);
+				annotation = AnnotationUtils.findAnnotation(method.getDeclaringClass().getMethod(method.getName(), method.getParameterTypes()), NewSpan.class);
 			} catch (NoSuchMethodException e) {
 			} catch (SecurityException e) {
 			}

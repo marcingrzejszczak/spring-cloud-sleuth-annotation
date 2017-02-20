@@ -38,7 +38,7 @@ public class SleuthSpanCreatorAdvice {
 
 		Method mostSpecificMethod = AopUtils.getMostSpecificMethod(method, pjp.getTarget().getClass());
 
-		CreateSleuthSpan annotation = SleuthAnnotationUtils.findAnnotation(mostSpecificMethod);
+		NewSpan annotation = SleuthAnnotationUtils.findAnnotation(mostSpecificMethod);
 
 		if (annotation == null) {
 			return pjp.proceed();

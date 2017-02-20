@@ -73,18 +73,18 @@ public class SleuthSpanCreatorAdviceNegativTest {
 	
 	protected interface TestBeanI {
 		
-		@CreateSleuthSpan
+		@NewSpan
 		void testMethod();
 		
 		void testMethod2();
 		
 		void testMethod3();
 		
-		@CreateSleuthSpan(name = "testMethod4")
+		@NewSpan(name = "testMethod4")
 		void testMethod4();
 		
-		@CreateSleuthSpan(name = "testMethod5")
-		void testMethod5(@SleuthSpanTag("testTag") String test);
+		@NewSpan(name = "testMethod5")
+		void testMethod5(@SpanTag("testTag") String test);
 		
 		void testMethod6(String test);
 		
@@ -97,12 +97,12 @@ public class SleuthSpanCreatorAdviceNegativTest {
 		public void testMethod() {
 		}
 
-		@CreateSleuthSpan
+		@NewSpan
 		@Override
 		public void testMethod2() {
 		}
 
-		@CreateSleuthSpan(name = "testMethod3")
+		@NewSpan(name = "testMethod3")
 		@Override
 		public void testMethod3() {
 		}
@@ -115,9 +115,9 @@ public class SleuthSpanCreatorAdviceNegativTest {
 		public void testMethod5(String test) {
 		}
 
-		@CreateSleuthSpan(name = "testMethod6")
+		@NewSpan(name = "testMethod6")
 		@Override
-		public void testMethod6(@SleuthSpanTag("testTag6") String test) {
+		public void testMethod6(@SpanTag("testTag6") String test) {
 			
 		}
 

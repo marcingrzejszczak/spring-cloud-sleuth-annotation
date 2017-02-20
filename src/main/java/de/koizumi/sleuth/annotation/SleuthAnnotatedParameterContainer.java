@@ -1,18 +1,18 @@
 package de.koizumi.sleuth.annotation;
-import java.lang.reflect.Parameter;
+import java.lang.annotation.Annotation;
 
 public class SleuthAnnotatedParameterContainer {
 
 	private int parameterIndex;
-	private SleuthSpanTag annotation;
+	private SpanTag annotation;
 	private Object argument;
-	private Parameter parameter;
+	private Annotation parameter;
 
-	public SleuthSpanTag getAnnotation() {
+	public SpanTag getAnnotation() {
 		return annotation;
 	}
 
-	public void setAnnotation(SleuthSpanTag annotation) {
+	public void setAnnotation(SpanTag annotation) {
 		this.annotation = annotation;
 	}
 
@@ -24,11 +24,11 @@ public class SleuthAnnotatedParameterContainer {
 		this.argument = argument;
 	}
 
-	public Parameter getParameter() {
+	public Annotation getParameter() {
 		return parameter;
 	}
 
-	public void setParameter(Parameter parameter) {
+	public void setParameter(Annotation parameter) {
 		this.parameter = parameter;
 	}
 

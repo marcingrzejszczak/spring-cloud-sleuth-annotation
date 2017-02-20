@@ -5,6 +5,6 @@ import org.springframework.cloud.sleuth.Span;
 
 public interface SleuthSpanCreator {
 
-	Span createSpan(JoinPoint pjp, CreateSleuthSpan sleuthInstrumented);
+	Span createSpan(JoinPoint pjp, NewSpan sleuthInstrumented);
 		
 }
