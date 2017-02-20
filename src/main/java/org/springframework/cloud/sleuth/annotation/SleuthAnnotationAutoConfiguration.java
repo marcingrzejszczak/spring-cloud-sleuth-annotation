@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ConditionalOnBean(Tracer.class)
 @ConditionalOnProperty(name = "spring.sleuth.annotation.enabled", matchIfMissing = true)
-public class SleuthAnnotationConfiguration {
+public class SleuthAnnotationAutoConfiguration {
 	
 	@Autowired private Tracer tracer;
 	
@@ -29,7 +29,7 @@ public class SleuthAnnotationConfiguration {
 	
 	@Bean
 	SleuthSpanCreateBeanPostProcessor sleuthSpanCreateBeanPostProcessor(SleuthSpanCreator spanCreator) {
-		return new SleuthSpanCreateBeanPostProcessor(new SleuthSpanCreatorAdvice(spanCreator, tracer));
+		return new SleuthSpanCreateBeanPostProcessor(new SleuthSpanCreatorAdvice(spanCreator, this.tracer));
 	}
 	
 }

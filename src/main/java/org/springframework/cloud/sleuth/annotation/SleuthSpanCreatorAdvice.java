@@ -13,7 +13,13 @@ import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 
 /**
- * Aspect that wraps all public methods and checks if any part of that
+ * Due to limitations of Spring AOP we're not creating two separate pointcuts:
+ * one for classes annotated with the {@link NewSpan} annotation and one
+ * for methods annotated with that annotation cause it will not pick interfaces
+ * that have annotated methods.
+ *
+ * This advice is not registered in Spring context. We will pass it and register
+ * it manually when necessary.
  *
  * @author Christian Schwerdtfeger
  * @since 1.2.0
@@ -29,6 +35,10 @@ class SleuthSpanCreatorAdvice {
 		this.tracer = tracer;
 	}
 
+	/**
+	 * Not creating two separate pointcuts due to the fact that it's not possible
+	 * to create a pointcut for interfaces with annotated methods.
+	 */
 	@Pointcut("execution(public * *(..))")
 	private void anyPublicOperation() {
 	}

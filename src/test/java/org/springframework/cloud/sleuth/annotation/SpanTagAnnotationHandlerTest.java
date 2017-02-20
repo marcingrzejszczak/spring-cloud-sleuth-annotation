@@ -82,7 +82,7 @@ public class SpanTagAnnotationHandlerTest {
 	}
 	
 	@Configuration
-	@Import({ TraceAutoConfiguration.class, CreateSleuthTestConfiguration.class, SleuthAnnotationConfiguration.class })
+	@Import({ TraceAutoConfiguration.class, CreateSleuthTestConfiguration.class, SleuthAnnotationAutoConfiguration.class })
 	protected static class TestConfiguration {
 
 		@Bean

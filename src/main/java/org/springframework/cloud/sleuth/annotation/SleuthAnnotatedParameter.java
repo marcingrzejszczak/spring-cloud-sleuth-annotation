@@ -1,12 +1,9 @@
 package org.springframework.cloud.sleuth.annotation;
-import java.lang.annotation.Annotation;
-
-class SleuthAnnotatedParameterContainer {
+class SleuthAnnotatedParameter {
 
 	private int parameterIndex;
 	private SpanTag annotation;
 	private Object argument;
-	private Annotation parameter;
 
 	SpanTag getAnnotation() {
 		return this.annotation;
@@ -22,14 +19,6 @@ class SleuthAnnotatedParameterContainer {
 
 	void setArgument(Object argument) {
 		this.argument = argument;
-	}
-
-	Annotation getParameter() {
-		return this.parameter;
-	}
-
-	void setParameter(Annotation parameter) {
-		this.parameter = parameter;
 	}
 
 	int getParameterIndex() {
