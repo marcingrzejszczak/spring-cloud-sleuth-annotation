@@ -20,7 +20,6 @@ public @interface SpanTag {
 
 	/**
 	 * The name of the tag which should be created
-	 * @return
 	 */
 	String value();
 	

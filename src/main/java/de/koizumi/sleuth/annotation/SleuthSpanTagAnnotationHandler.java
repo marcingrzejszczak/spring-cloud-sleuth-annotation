@@ -75,7 +75,7 @@ public class SleuthSpanTagAnnotationHandler {
 	private void addAnnotatedArguments(List<SleuthAnnotatedParameterContainer> toBeAdded) {
 		for (SleuthAnnotatedParameterContainer container : toBeAdded) {
 			String tagValue = resolveTagValue(container.getAnnotation(), container.getArgument());
-			tracer.addTag(container.getAnnotation().value(), tagValue);
+			this.tracer.addTag(container.getAnnotation().value(), tagValue);
 		}
 	}
 
@@ -84,7 +84,7 @@ public class SleuthSpanTagAnnotationHandler {
 			return "null";
 		}
 		if (StringUtils.isNotBlank(annotation.tagValueResolverBeanName())) {
-			SleuthTagValueResolver tagValueResolver = context.getBean(annotation.tagValueResolverBeanName(),
+			SleuthTagValueResolver tagValueResolver = this.context.getBean(annotation.tagValueResolverBeanName(),
 					SleuthTagValueResolver.class);
 			if (tagValueResolver != null) {
 				return tagValueResolver.resolveTagValue(argument);
@@ -92,7 +92,6 @@ public class SleuthSpanTagAnnotationHandler {
 		} else if (StringUtils.isNotBlank(annotation.tagValueExpression())) {
 			try {
 				ExpressionParser expressionParser = new SpelExpressionParser();
-
 				Expression expression = expressionParser.parseExpression(annotation.tagValueExpression());
 				return expression.getValue(argument, String.class);
 			} catch (Exception e) {

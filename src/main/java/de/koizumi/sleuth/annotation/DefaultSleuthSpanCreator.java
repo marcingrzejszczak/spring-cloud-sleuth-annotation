@@ -29,7 +29,7 @@ public class DefaultSleuthSpanCreator implements SleuthSpanCreator {
 			String key = StringUtils.isNotEmpty(newSpanAnnotation.name()) ?
 					newSpanAnnotation.name() : pjp.getSignature().getDeclaringType().getSimpleName() + "/" + pjp.getSignature().getName();
 			Span span = tracer.createSpan(key, tracer.getCurrentSpan());
-			annotationSpanUtil.addAnnotatedParameters(pjp);
+			this.annotationSpanUtil.addAnnotatedParameters(pjp);
 			return span;
 		}
 		return null;

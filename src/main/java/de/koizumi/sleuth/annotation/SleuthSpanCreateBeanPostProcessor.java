@@ -25,14 +25,12 @@ public class SleuthSpanCreateBeanPostProcessor implements BeanPostProcessor {
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		boolean atLeastOneMethodAnnotated = false;
-
 		for (Method method : bean.getClass().getMethods()) {
 			if (SleuthAnnotationUtils.isMethodAnnotated(method)) {
 				atLeastOneMethodAnnotated = true;
 				break;
 			}
 		}
-		
 		if (!atLeastOneMethodAnnotated && (AopUtils.isAopProxy(bean) || AopUtils.isCglibProxy(bean) || AopUtils.isJdkDynamicProxy(bean))) {
 			Class<?> beanTargetClass = AopUtils.getTargetClass(bean);
 			for (Method method : beanTargetClass.getMethods()) {
@@ -42,15 +40,12 @@ public class SleuthSpanCreateBeanPostProcessor implements BeanPostProcessor {
 				}
 			}
 		}
-
 		if (!atLeastOneMethodAnnotated) {
 			return bean;
 		}
-		
 		AspectJProxyFactory factory = new AspectJProxyFactory(bean);
-		factory.addAspect(advice);
-		Object proxy = factory.getProxy();
-		return proxy;
+		factory.addAspect(this.advice);
+		return factory.getProxy();
 	}
 
 }

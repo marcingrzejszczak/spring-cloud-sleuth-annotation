@@ -9,7 +9,7 @@ public class SleuthAnnotatedParameterContainer {
 	private Annotation parameter;
 
 	public SpanTag getAnnotation() {
-		return annotation;
+		return this.annotation;
 	}
 
 	public void setAnnotation(SpanTag annotation) {
@@ -17,7 +17,7 @@ public class SleuthAnnotatedParameterContainer {
 	}
 
 	public Object getArgument() {
-		return argument;
+		return this.argument;
 	}
 
 	public void setArgument(Object argument) {
@@ -25,7 +25,7 @@ public class SleuthAnnotatedParameterContainer {
 	}
 
 	public Annotation getParameter() {
-		return parameter;
+		return this.parameter;
 	}
 
 	public void setParameter(Annotation parameter) {
@@ -33,7 +33,7 @@ public class SleuthAnnotatedParameterContainer {
 	}
 
 	public int getParameterIndex() {
-		return parameterIndex;
+		return this.parameterIndex;
 	}
 
 	public void setParameterIndex(int parameterIndex) {
