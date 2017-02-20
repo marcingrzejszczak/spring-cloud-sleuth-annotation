@@ -1,6 +1,7 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.sleuth.Tracer;
@@ -9,11 +10,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@ConditionalOnBean(Tracer.class)
 @ConditionalOnProperty(name = "spring.sleuth.annotation.enabled", matchIfMissing = true)
 public class SleuthAnnotationConfiguration {
 	
-	@Autowired
-	private Tracer tracer;
+	@Autowired private Tracer tracer;
 	
 	@Bean
 	SleuthSpanTagAnnotationHandler spanUtil(ApplicationContext context) {

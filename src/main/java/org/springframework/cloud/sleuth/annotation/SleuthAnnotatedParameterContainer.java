@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 import java.lang.annotation.Annotation;
 
 class SleuthAnnotatedParameterContainer {

@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.koizumi.sleuth.annotation.SleuthSpanCreatorAdviceNegativTest.TestConfiguration;
+import org.springframework.cloud.sleuth.annotation.SleuthSpanCreatorAdviceNegativTest.TestConfiguration;
 
 @SpringBootTest(classes = TestConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)

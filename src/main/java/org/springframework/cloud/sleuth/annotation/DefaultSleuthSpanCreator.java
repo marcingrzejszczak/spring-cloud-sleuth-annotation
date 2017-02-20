@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.JoinPoint;

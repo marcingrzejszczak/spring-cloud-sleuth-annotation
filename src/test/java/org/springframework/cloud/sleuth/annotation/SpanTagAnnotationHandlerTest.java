@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.koizumi.sleuth.annotation.SpanTagAnnotationHandlerTest.TestConfiguration;
+import org.springframework.cloud.sleuth.annotation.SpanTagAnnotationHandlerTest.TestConfiguration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;

@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.koizumi.sleuth.annotation.SleuthSpanCreatorAdviceTest.TestConfiguration;
+import org.springframework.cloud.sleuth.annotation.SleuthSpanCreatorAdviceTest.TestConfiguration;
 
 @SpringBootTest(classes = TestConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)

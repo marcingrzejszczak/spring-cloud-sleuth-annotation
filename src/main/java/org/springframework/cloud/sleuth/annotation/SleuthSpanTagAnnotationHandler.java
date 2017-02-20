@@ -1,4 +1,4 @@
-package de.koizumi.sleuth.annotation;
+package org.springframework.cloud.sleuth.annotation;
 
 import java.lang.annotation.Annotation;
 import java.lang.invoke.MethodHandles;
@@ -92,6 +92,7 @@ class SleuthSpanTagAnnotationHandler {
 				Expression expression = expressionParser.parseExpression(annotation.tagValueExpression());
 				return expression.getValue(argument, String.class);
 			} catch (Exception e) {
+				log.error("Exception occurred while tying to evaluate the SPEL expression", e);
 			}
 		}
 		return argument.toString();
