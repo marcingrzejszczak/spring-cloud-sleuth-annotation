@@ -1,42 +1,42 @@
 package de.koizumi.sleuth.annotation;
 import java.lang.annotation.Annotation;
 
-public class SleuthAnnotatedParameterContainer {
+class SleuthAnnotatedParameterContainer {
 
 	private int parameterIndex;
 	private SpanTag annotation;
 	private Object argument;
 	private Annotation parameter;
 
-	public SpanTag getAnnotation() {
+	SpanTag getAnnotation() {
 		return this.annotation;
 	}
 
-	public void setAnnotation(SpanTag annotation) {
+	void setAnnotation(SpanTag annotation) {
 		this.annotation = annotation;
 	}
 
-	public Object getArgument() {
+	Object getArgument() {
 		return this.argument;
 	}
 
-	public void setArgument(Object argument) {
+	void setArgument(Object argument) {
 		this.argument = argument;
 	}
 
-	public Annotation getParameter() {
+	Annotation getParameter() {
 		return this.parameter;
 	}
 
-	public void setParameter(Annotation parameter) {
+	void setParameter(Annotation parameter) {
 		this.parameter = parameter;
 	}
 
-	public int getParameterIndex() {
+	int getParameterIndex() {
 		return this.parameterIndex;
 	}
 
-	public void setParameterIndex(int parameterIndex) {
+	void setParameterIndex(int parameterIndex) {
 		this.parameterIndex = parameterIndex;
 	}
 

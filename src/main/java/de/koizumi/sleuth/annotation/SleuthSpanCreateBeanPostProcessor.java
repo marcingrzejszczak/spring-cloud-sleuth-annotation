@@ -8,7 +8,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
-public class SleuthSpanCreateBeanPostProcessor implements BeanPostProcessor {
+class SleuthSpanCreateBeanPostProcessor implements BeanPostProcessor {
 	
 	private SleuthSpanCreatorAdvice advice;
 

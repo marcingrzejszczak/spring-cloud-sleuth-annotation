@@ -13,28 +13,25 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-public class SleuthSpanTagAnnotationHandler {
+class SleuthSpanTagAnnotationHandler {
 
 	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
-	private ApplicationContext context;
-
-	private Tracer tracer;
-
-	@Autowired
-	public SleuthSpanTagAnnotationHandler(ApplicationContext context, Tracer tracer) {
+	private final ApplicationContext context;
+	private final Tracer tracer;
+	
+	SleuthSpanTagAnnotationHandler(ApplicationContext context, Tracer tracer) {
 		this.context = context;
 		this.tracer = tracer;
 	}
 
-	public void addAnnotatedParameters(JoinPoint pjp) {
+	void addAnnotatedParameters(JoinPoint pjp) {
 		try {
 			Signature signature = pjp.getStaticPart().getSignature();
 			if (signature instanceof MethodSignature) {
@@ -51,7 +48,7 @@ public class SleuthSpanTagAnnotationHandler {
 				addAnnotatedArguments(annotatedParametersIndices);
 			}
 		} catch (SecurityException e) {
-			log.error("Exception occurred while trying to add annotated parameters, e");
+			log.error("Exception occurred while trying to add annotated parameters", e);
 		}
 	}
 

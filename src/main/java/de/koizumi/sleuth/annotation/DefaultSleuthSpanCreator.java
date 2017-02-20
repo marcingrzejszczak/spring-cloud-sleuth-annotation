@@ -12,7 +12,7 @@ import org.springframework.cloud.sleuth.Tracer;
  *
  * @since 1.2.0
  */
-public class DefaultSleuthSpanCreator implements SleuthSpanCreator {
+class DefaultSleuthSpanCreator implements SleuthSpanCreator {
 	
 	private Tracer tracer;
 	private SleuthSpanTagAnnotationHandler annotationSpanUtil;

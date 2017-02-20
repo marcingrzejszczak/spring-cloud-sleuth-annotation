@@ -16,18 +16,18 @@ public class SleuthAnnotationConfiguration {
 	private Tracer tracer;
 	
 	@Bean
-	public SleuthSpanTagAnnotationHandler spanUtil(ApplicationContext context) {
+	SleuthSpanTagAnnotationHandler spanUtil(ApplicationContext context) {
 		return new SleuthSpanTagAnnotationHandler(context, this.tracer);
 	}
 
-	@ConditionalOnMissingBean(SleuthSpanCreator.class)
 	@Bean
+	@ConditionalOnMissingBean(SleuthSpanCreator.class)
 	SleuthSpanCreator spanCreator() {
 		return new DefaultSleuthSpanCreator(this.tracer, spanUtil(null));
 	}
 	
 	@Bean
-	public SleuthSpanCreateBeanPostProcessor sleuthSpanCreateBeanPostProcessor(SleuthSpanCreator spanCreator) {
+	SleuthSpanCreateBeanPostProcessor sleuthSpanCreateBeanPostProcessor(SleuthSpanCreator spanCreator) {
 		return new SleuthSpanCreateBeanPostProcessor(new SleuthSpanCreatorAdvice(spanCreator, tracer));
 	}
 	

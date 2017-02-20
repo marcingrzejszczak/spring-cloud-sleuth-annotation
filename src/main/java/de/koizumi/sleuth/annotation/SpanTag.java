@@ -22,7 +22,7 @@ public @interface SpanTag {
 	 * The name of the tag which should be created
 	 */
 	String value();
-	
+
 	String tagValueExpression() default "";
 	
 	String tagValueResolverBeanName() default "";

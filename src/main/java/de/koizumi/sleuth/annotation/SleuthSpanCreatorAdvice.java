@@ -9,7 +9,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.aop.support.AopUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 
@@ -20,12 +19,11 @@ import org.springframework.cloud.sleuth.Tracer;
  * @since 1.2.0
  */
 @Aspect
-public class SleuthSpanCreatorAdvice {
+class SleuthSpanCreatorAdvice {
 
-	private SleuthSpanCreator spanCreator;
-	private Tracer tracer;
+	private final SleuthSpanCreator spanCreator;
+	private final Tracer tracer;
 
-	@Autowired
 	public SleuthSpanCreatorAdvice(SleuthSpanCreator spanCreator, Tracer tracer) {
 		this.spanCreator = spanCreator;
 		this.tracer = tracer;
