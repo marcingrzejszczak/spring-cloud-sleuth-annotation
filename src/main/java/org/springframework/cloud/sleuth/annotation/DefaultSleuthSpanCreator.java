@@ -25,10 +25,10 @@ class DefaultSleuthSpanCreator implements SleuthSpanCreator {
 
 	@Override
 	public Span createSpan(JoinPoint pjp, NewSpan newSpanAnnotation) {
-		if (tracer.isTracing()) {
+		if (this.tracer.isTracing()) {
 			String key = StringUtils.isNotEmpty(newSpanAnnotation.name()) ?
-					newSpanAnnotation.name() : pjp.getSignature().getDeclaringType().getSimpleName() + "/" + pjp.getSignature().getName();
-			Span span = tracer.createSpan(key, tracer.getCurrentSpan());
+					newSpanAnnotation.name() : pjp.getSignature().getName();
+			Span span = this.tracer.createSpan(key, this.tracer.getCurrentSpan());
 			this.annotationSpanUtil.addAnnotatedParameters(pjp);
 			return span;
 		}

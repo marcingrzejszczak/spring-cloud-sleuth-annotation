@@ -53,7 +53,7 @@ public class SleuthSpanCreatorAdviceNegativTest {
 	public void shouldCallAdviceForAnnotatedBean() throws Throwable {
 		annotatedTestBean.testMethod();
 		
-		Mockito.verify(tracer).createSpan(Mockito.eq("TestBeanI/testMethod"), Mockito.<Span> any());
+		Mockito.verify(tracer).createSpan(Mockito.eq("testMethod"), Mockito.<Span> any());
 		Mockito.verify(adviceHolder.advice).instrumentOnMethodAnnotation(Mockito.<ProceedingJoinPoint> any());
 		
 	}

@@ -23,8 +23,7 @@ import java.lang.annotation.Target;
 public @interface NewSpan {
 
 	/**
-	 * The name of the span which will be created. Default is "classname/methodname"
+	 * The name of the span which will be created. Default is "methodname"
 	 */
 	String name() default "";
-
 }

@@ -38,14 +38,14 @@ public class SleuthSpanCreatorAdviceTest {
 	public void shouldCreateSpanWhenAnnotationOnInterfaceMethod() {
 		testBean.testMethod();
 		
-		Mockito.verify(tracer).createSpan(Mockito.eq("TestBeanI/testMethod"), Mockito.<Span> any());
+		Mockito.verify(tracer).createSpan(Mockito.eq("testMethod"), Mockito.<Span> any());
 	}
 	
 	@Test
 	public void shouldCreateSpanWhenAnnotationOnClassMethod() {
 		testBean.testMethod2();
 		
-		Mockito.verify(tracer).createSpan(Mockito.eq("TestBeanI/testMethod2"), Mockito.<Span> any());
+		Mockito.verify(tracer).createSpan(Mockito.eq("testMethod2"), Mockito.<Span> any());
 	}
 	
 	@Test
