@@ -8,12 +8,12 @@ targetCompatibility = 1.7
 group = "de.koizumi"
 version = "0.1.SNAPSHOT"
 dependencies {
-	compile ("org.springframework.cloud:spring-cloud-sleuth-core:1.0.0.BUILD-SNAPSHOT")
+	compile ("org.springframework.cloud:spring-cloud-sleuth-core:1.2.0.BUILD-SNAPSHOT")
 	compile ("org.apache.commons:commons-lang3:3.4")
 	compile ("org.aspectj:aspectjweaver:1.8.8")
-	compile ("org.springframework.boot:spring-boot-autoconfigure:1.4.0.BUILD-SNAPSHOT")
+	compile ("org.springframework.boot:spring-boot-autoconfigure:1.5.2.BUILD-SNAPSHOT")
 	
-	testCompile ("org.springframework.boot:spring-boot-starter-test:1.4.0.BUILD-SNAPSHOT")
+	testCompile ("org.springframework.boot:spring-boot-starter-test:1.5.2.BUILD-SNAPSHOT")
 	testCompile ('org.assertj:assertj-core:2.3.0')
 }
 

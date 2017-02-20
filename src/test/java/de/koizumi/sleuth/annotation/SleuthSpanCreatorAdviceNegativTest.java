@@ -6,26 +6,21 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 import org.springframework.cloud.sleuth.autoconfig.TraceAutoConfiguration;
+import org.springframework.cloud.sleuth.log.NoOpSpanLogger;
+import org.springframework.cloud.sleuth.log.SpanLogger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import de.koizumi.sleuth.annotation.CreateSleuthSpan;
-import de.koizumi.sleuth.annotation.DefaultSleuthSpanCreator;
-import de.koizumi.sleuth.annotation.SleuthSpanTagAnnotationHandler;
-import de.koizumi.sleuth.annotation.SleuthSpanCreateBeanPostProcessor;
-import de.koizumi.sleuth.annotation.SleuthSpanCreator;
-import de.koizumi.sleuth.annotation.SleuthSpanCreatorAdvice;
-import de.koizumi.sleuth.annotation.SleuthSpanTag;
 import de.koizumi.sleuth.annotation.SleuthSpanCreatorAdviceNegativTest.TestConfiguration;
 
-@SpringApplicationConfiguration(classes = TestConfiguration.class)
+@SpringBootTest(classes = TestConfiguration.class)
 @RunWith(SpringJUnit4ClassRunner.class)
 public class SleuthSpanCreatorAdviceNegativTest {
 
@@ -180,6 +175,10 @@ public class SleuthSpanCreatorAdviceNegativTest {
 			return Mockito.mock(Tracer.class);
 		}
 
+		@Bean
+		public SpanLogger spanLogger() {
+			return new NoOpSpanLogger();
+		}
 	}
 	
 	protected static class SleuthSpanCreatorAdviceHolder {
