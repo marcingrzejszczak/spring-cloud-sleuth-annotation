@@ -13,6 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.sleuth.Span;
 import org.springframework.cloud.sleuth.Tracer;
 
+/**
+ * Aspect that wraps all public methods and checks if any part of that
+ *
+ * @author Christian Schwerdtfeger
+ * @since 1.2.0
+ */
 @Aspect
 public class SleuthSpanCreatorAdvice {
 
@@ -35,22 +41,15 @@ public class SleuthSpanCreatorAdvice {
 		if (method == null) {
 			return pjp.proceed();
 		}
-
 		Method mostSpecificMethod = AopUtils.getMostSpecificMethod(method, pjp.getTarget().getClass());
-
 		NewSpan annotation = SleuthAnnotationUtils.findAnnotation(mostSpecificMethod);
-
 		if (annotation == null) {
 			return pjp.proceed();
 		}
-
 		Span span = null;
 		try {
 			span = spanCreator.createSpan(pjp, annotation);
-
-			Object retVal = pjp.proceed();
-
-			return retVal;
+			return pjp.proceed();
 		} finally {
 			if (span != null) {
 				tracer.close(span);
@@ -60,12 +59,9 @@ public class SleuthSpanCreatorAdvice {
 	
 	private Method getMethod(ProceedingJoinPoint pjp) {
 		Signature signature = pjp.getStaticPart().getSignature();
-
 		if (signature instanceof MethodSignature) {
 			MethodSignature methodSignature = (MethodSignature) signature;
-			Method method = methodSignature.getMethod();
-
-			return method;
+			return methodSignature.getMethod();
 		}
 		return null;
 	}

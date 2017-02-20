@@ -1,11 +1,14 @@
 package de.koizumi.sleuth.annotation;
 
 import java.lang.annotation.Annotation;
+import java.lang.invoke.MethodHandles;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -18,6 +21,8 @@ import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 public class SleuthSpanTagAnnotationHandler {
+
+	private static final Log log = LogFactory.getLog(MethodHandles.lookup().lookupClass());
 
 	private ApplicationContext context;
 
@@ -45,9 +50,8 @@ public class SleuthSpanTagAnnotationHandler {
 				}
 				addAnnotatedArguments(annotatedParametersIndices);
 			}
-
 		} catch (SecurityException e) {
-			e.printStackTrace();
+			log.error("Exception occurred while trying to add annotated parameters, e");
 		}
 	}
 
@@ -100,7 +104,6 @@ public class SleuthSpanTagAnnotationHandler {
 	private List<SleuthAnnotatedParameterContainer> findAnnotatedParameters(Method method, Object[] args) {
 		Annotation[][] parameters = method.getParameterAnnotations();
 		List<SleuthAnnotatedParameterContainer> result = new ArrayList<>();
-
 		int i = 0;
 		for (Annotation[] parameter : parameters) {
 			for (Annotation parameter2 : parameter) {
