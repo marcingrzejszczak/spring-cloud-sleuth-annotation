@@ -46,11 +46,11 @@ class SleuthSpanCreatorAdvice {
 		}
 		Span span = null;
 		try {
-			span = spanCreator.createSpan(pjp, annotation);
+			span = this.spanCreator.createSpan(pjp, annotation);
 			return pjp.proceed();
 		} finally {
 			if (span != null) {
-				tracer.close(span);
+				this.tracer.close(span);
 			}
 		}
 	}
